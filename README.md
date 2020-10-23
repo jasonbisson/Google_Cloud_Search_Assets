@@ -29,10 +29,12 @@ $ search_assets.sh --dns-domain <Your DNS Domain>
 $ search_permission.sh --dns-domain <Your DNS Domain>
 
 ### Export assets (resources,iam policy, org policy, access policy) to Big Query for analysis
-#Create Bigquery dataset names assets in CLI or console
+
+#### Create Bigquery dataset names assets in CLI or console
+
 $ bq --location=US mk -d --description "$(gcloud config list --format 'value(core.account)') created assets dataset" $(gcloud config list --format 'value(core.project)'):assets
 
-#Load assets into Big Query table 
+#### Load assets into Big Query table 
 $ load_assets_bq.sh --dns-domain <Your DNS Domain>
 
 ### Entitlement report for users and service accounts
