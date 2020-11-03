@@ -78,7 +78,7 @@ SQL Examples https://cloud.google.com/asset-inventory/docs/exporting-to-bigquery
 
 ```
 SELECT *
-FROM `<Path to your BQ Table`
+FROM `<Path to your BQ Table>`
 JOIN UNNEST(org_policy) AS op
 WHERE
   op.constraint = "constraints/compute.vmExternalIpAccess"
