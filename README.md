@@ -72,4 +72,15 @@ Please refer the `variables.tf` file for the required and optional variables.
 ## Cloud Assets documents 
 SQL Examples https://cloud.google.com/asset-inventory/docs/exporting-to-bigquery#querying_an_asset_snapshot
 
+## SQL Examples
 
+### Public IP available for deployments
+
+```
+SELECT *
+FROM `<Path to your BQ Table`
+JOIN UNNEST(org_policy) AS op
+WHERE
+  op.constraint = "constraints/compute.vmExternalIpAccess"
+  AND (op.boolean_policy IS NULL OR op.boolean_policy.enforced = FALSE);
+```
