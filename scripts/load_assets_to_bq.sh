@@ -37,7 +37,7 @@ function resource () {
 }
 
 function iam_policy () {
-    gcloud asset export --content-type 'iam_policy' --organization=${org_id} --bigquery-table=projects/${project_id}/datasets/assets/tables/IAM_POLICY --output-bigquery-force
+    gcloud asset export --content-type 'iam-policy' --organization=${org_id} --bigquery-table=projects/${project_id}/datasets/assets/tables/IAM_POLICY --output-bigquery-force
 }
 
 function org-policy () {
