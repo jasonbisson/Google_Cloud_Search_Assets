@@ -17,9 +17,10 @@
 [[ "$1" = "--dns-domain" ]] &&  export org_name=$2
 
 export org_id=$(gcloud organizations list --format=[no-heading] | grep ^${org_name} | awk '{print $2}')
+export permission="iam.serviceAccounts.actAs"
 
 function search-all-permissions () {
-    gcloud beta asset analyze-iam-policy --organization=${org_id} --permissions="iam.serviceAccounts.actAs" --format json
+    gcloud beta asset analyze-iam-policy --organization=${org_id}  --permissions="${permission}" --format json | jq -r '.[] | .ACLs[] | [.accesses[].permission, .identities[].name, .resources[].fullResourceName] | join (",")'|sed 's/serviceAccount://g ; s/user://g ; s/\/\/cloudresourcemanager.googleapis.com\/projects\///g' |sort -u
 }
 
 search-all-permissions
