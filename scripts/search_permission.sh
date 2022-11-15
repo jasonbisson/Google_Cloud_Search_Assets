@@ -20,7 +20,7 @@ export org_id=$(gcloud organizations list --format=[no-heading] | grep ^${org_na
 export permission="iam.serviceAccounts.actAs"
 
 function search-all-permissions () {
-    gcloud beta asset analyze-iam-policy --organization=${org_id}  --permissions="${permission}" --format json | jq -r '.[] | .ACLs[] | [.accesses[].permission, .identities[].name, .resources[].fullResourceName] | join (",")'|sed 's/serviceAccount://g ; s/user://g ; s/\/\/cloudresourcemanager.googleapis.com\/projects\///g' |sort -u
+    gcloud asset analyze-iam-policy --organization=${org_id}  --permissions="${permission}" --format json | jq -r '.[] | .ACLs[] | [.accesses[].permission, .identities[].name, .resources[].fullResourceName] | join (",")'|sed 's/serviceAccount://g ; s/user://g ; s/\/\/cloudresourcemanager.googleapis.com\/projects\///g' |sort -u
 }
 
 search-all-permissions
